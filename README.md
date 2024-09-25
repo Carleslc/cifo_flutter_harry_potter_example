@@ -1,0 +1,69 @@
+# harry_potter_example
+
+**Repositori d'aplicacions: [cifo_flutter](https://github.com/Carleslc/cifo_flutter)**
+
+Aplicació d'exemple per provar layouts i com funciona la navegació a Flutter.
+
+La primera pantalla conté una llista de personatges de Harry Potter, i en fer click en un d'ells s'obre una nova pantalla amb una imatge i els detalls del personatge seleccionat.
+
+Estructura de l'aplicació:
+
+```sh
+harry_potter_example/lib
+├── main.dart
+├── models
+│   └── character.dart
+├── screens
+│   ├── character_detail.dart
+│   └── character_list.dart
+└── utils
+    └── random_utils.dart
+```
+
+L'inici de l'aplicació és a `main.dart`, a `models` hi ha una clase per definir atributs d'un personatge, a `screens` està el codi de les dues pantalles i a `utils` hi ha una extensió de `Random` que s'utilitza per generar un número de reviews aleatòries per cada personatge definit a `screens/character_list.dart`.
+
+<a href="https://idx.google.com/import?url=https%3A%2F%2Fgithub.com%2FCarleslc%2Fcifo_flutter_harry_potter_example%2F" target="_blank">
+  <picture>
+    <source
+      media="(prefers-color-scheme: dark)"
+      srcset="https://cdn.idx.dev/btn/open_dark_32.svg">
+    <source
+      media="(prefers-color-scheme: light)"
+      srcset="https://cdn.idx.dev/btn/open_light_32.svg">
+    <img
+      height="32"
+      alt="Open in IDX"
+      src="https://cdn.idx.dev/btn/open_purple_32.svg">
+  </picture>
+</a>
+
+## Instal·lació
+
+1. S'ha d'haver instal·lat el [Flutter SDK](https://docs.flutter.dev/get-started/install).
+
+2. Clonar el repositori:
+
+```sh
+git pull https://github.com/Carleslc/cifo_flutter_harry_potter_example.git
+# GitHub CLI: gh repo clone Carleslc/cifo_flutter_harry_potter_example
+
+cd cifo_flutter_harry_potter_example
+```
+
+3. Instal·lar les dependències:
+
+```sh
+flutter pub get
+```
+
+4. Executar l'aplicació amb `flutter run` o desde l'IDE.
+
+## Imatges
+
+![harry_potter_example_1.png](<./images/harry_potter_example_1.png>)
+
+![harry_potter_example_2.png](<./images/harry_potter_example_2.png>)
+
+## Recursos
+
+- [google_fonts](https://pub.dev/packages/google_fonts)
