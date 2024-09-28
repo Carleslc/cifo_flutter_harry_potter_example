@@ -44,7 +44,9 @@ class CharacterList extends StatelessWidget {
   }
 }
 
-List<(Character character, {int reviews})> characters = [
+typedef CharacterReviews = (Character character, {int reviews});
+
+List<CharacterReviews> characters = [
   (
     const Character(
       name: 'Harry Potter',
