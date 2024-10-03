@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:harry_potter_example/screens/character_list.dart';
+import 'screens/character_list.dart';
 
 void main() {
   runApp(const HogwartsApp());
@@ -19,8 +19,9 @@ class HogwartsApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.montserratTextTheme(Theme.of(context).textTheme),
         appBarTheme: AppBarTheme(
-            foregroundColor: Colors.white,
-            backgroundColor: Colors.deepPurple.shade400),
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.deepPurple.shade400,
+        ),
       ),
       home: const CharacterList(),
     );

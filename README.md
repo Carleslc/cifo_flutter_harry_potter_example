@@ -6,21 +6,9 @@ Aplicació d'exemple per provar layouts i com funciona la navegació a Flutter.
 
 La primera pantalla conté una llista de personatges de Harry Potter, i en fer click en un d'ells s'obre una nova pantalla amb una imatge i els detalls del personatge seleccionat.
 
-Estructura de l'aplicació:
+Cada personatge té una quantitat de reviews generades aleatòriament. Es poden afegir reviews fent click sobre les estrelles, modificant el valor mitjà de les seves reviews.
 
-```sh
-harry_potter_example/lib
-├── main.dart
-├── models
-│   └── character.dart
-├── screens
-│   ├── character_detail.dart
-│   └── character_list.dart
-└── utils
-    └── random_utils.dart
-```
-
-L'inici de l'aplicació és a `main.dart`, a `models` hi ha una clase per definir atributs d'un personatge, a `screens` està el codi de les dues pantalles i a `utils` hi ha una extensió de `Random` que s'utilitza per generar un número de reviews aleatòries per cada personatge definit a `screens/character_list.dart`.
+Codi original: https://github.com/poqueque/cifo_2024s2_harry_potter/
 
 <a href="https://idx.google.com/import?url=https%3A%2F%2Fgithub.com%2FCarleslc%2Fcifo_flutter_harry_potter_example%2F" target="_blank">
   <picture>
@@ -57,6 +45,24 @@ flutter pub get
 ```
 
 4. Executar l'aplicació amb `flutter run` o desde l'IDE.
+
+## Estructura de l'aplicació
+
+```
+lib
+├── main.dart
+├── models
+│   └── character.dart
+├── screens
+│   ├── character_detail.dart
+│   └── character_list.dart
+├── utils
+│   └── random_utils.dart
+└── widgets
+    └── rating.dart
+```
+
+L'inici de l'aplicació és a `main.dart`, a `models` hi ha la clase `Character` per definir atributs d'un personatge, a `screens` està el codi de les dues pantalles, a `widgets` hi ha els widgets propis que no corresponen a una pantalla determinada i a `utils` hi ha una extensió de `Random` que s'utilitza per generar un número de reviews aleatòries per cada personatge definit a `screens/character_list.dart`.
 
 ## Imatges
 

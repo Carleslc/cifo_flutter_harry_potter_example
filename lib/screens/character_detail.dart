@@ -1,31 +1,32 @@
 import 'package:flutter/material.dart';
 
-import 'package:harry_potter_example/models/character.dart';
+import '../models/character.dart';
+import '../widgets/rating.dart';
 
-class CharacterDetail extends StatelessWidget {
+class CharacterDetail extends StatefulWidget {
+  const CharacterDetail({super.key, required this.character});
+
   final Character character;
-  final int reviews;
 
-  const CharacterDetail({
-    super.key,
-    required this.character,
-    this.reviews = 0,
-  });
+  @override
+  State<CharacterDetail> createState() => _CharacterDetailState();
+}
 
+class _CharacterDetailState extends State<CharacterDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(character.name),
+        title: Text(widget.character.name),
       ),
       body: Column(
         children: [
           // Imatge del personatge
           Expanded(
             child: Hero(
-              tag: character.name,
+              tag: widget.character.name,
               child: Image.network(
-                character.imageUrl,
+                widget.character.imageUrl,
                 fit: BoxFit.fitHeight,
                 width: 500,
               ),
@@ -42,7 +43,7 @@ class CharacterDetail extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     // Nom
                     child: Text(
-                      character.name,
+                      widget.character.name,
                       style: const TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
@@ -53,16 +54,22 @@ class CharacterDetail extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const Row(
-                        children: [
-                          Icon(Icons.star),
-                          Icon(Icons.star),
-                          Icon(Icons.star),
-                          Icon(Icons.star_border),
-                          Icon(Icons.star_border),
-                        ],
+                      Rating(
+                        value: widget.character.rating,
+                        onSelect: (int value) {
+                          // Update reviews
+                          setState(() {
+                            widget.character.reviews++;
+                            widget.character.totalRatings += value;
+                          });
+                          debugPrint('Review: $value');
+                          debugPrint('Rating: ${widget.character.rating}');
+                        },
                       ),
-                      Row(children: [Text('$reviews reviews')]),
+                      Text(
+                        '${widget.character.reviews} reviews',
+                        style: const TextStyle(fontSize: 16),
+                      ),
                     ],
                   ),
                 ],
@@ -76,17 +83,17 @@ class CharacterDetail extends StatelessWidget {
                     Column(children: [
                       const Icon(Icons.fitness_center),
                       const Text('Força'),
-                      Text('${character.strength}'),
+                      Text('${widget.character.strength}'),
                     ]),
                     Column(children: [
                       const Icon(Icons.auto_fix_normal),
                       const Text('Màgia'),
-                      Text('${character.magicPower}'),
+                      Text('${widget.character.magicPower}'),
                     ]),
                     Column(children: [
                       const Icon(Icons.speed),
                       const Text('Velocitat'),
-                      Text('${character.speed}'),
+                      Text('${widget.character.speed}'),
                     ]),
                   ],
                 ),
