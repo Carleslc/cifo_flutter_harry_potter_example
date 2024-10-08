@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
+import 'providers/hogwarts_data.dart';
 import 'screens/character_list.dart';
 
 void main() {
@@ -14,16 +16,21 @@ class HogwartsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: title,
-      theme: ThemeData(
-        textTheme: GoogleFonts.montserratTextTheme(Theme.of(context).textTheme),
-        appBarTheme: AppBarTheme(
-          foregroundColor: Colors.white,
-          backgroundColor: Colors.deepPurple.shade400,
+    return ChangeNotifierProvider<HogwartsData>(
+      create: (context) => HogwartsData(),
+      child: MaterialApp(
+        title: title,
+        theme: ThemeData(
+          textTheme:
+              GoogleFonts.montserratTextTheme(Theme.of(context).textTheme),
+          appBarTheme: AppBarTheme(
+            foregroundColor: Colors.white,
+            backgroundColor: Colors.deepPurple.shade400,
+          ),
         ),
+        home: const CharacterList(),
+        debugShowCheckedModeBanner: true, // debug banner
       ),
-      home: const CharacterList(),
     );
   }
 }

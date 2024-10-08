@@ -44,4 +44,9 @@ class Character {
           reviews: reviews,
           totalRatings: reviews * rating,
         );
+
+  void addReview(int rating) {
+    reviews++;
+    totalRatings += rating;
+  }
 }

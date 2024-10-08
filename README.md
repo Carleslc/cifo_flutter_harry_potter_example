@@ -2,7 +2,7 @@
 
 **Repositori d'aplicacions: [cifo_flutter](https://github.com/Carleslc/cifo_flutter)**
 
-Aplicació d'exemple per provar layouts i com funciona la navegació a Flutter.
+Aplicació d'exemple per provar layouts, com funciona la navegació a Flutter i com controlar l'estat amb la llibreria [provider](https://pub.dev/packages/provider).
 
 La primera pantalla conté una llista de personatges de Harry Potter, i en fer click en un d'ells s'obre una nova pantalla amb una imatge i els detalls del personatge seleccionat.
 
@@ -53,16 +53,20 @@ lib
 ├── main.dart
 ├── models
 │   └── character.dart
+├── providers
+│   └── hogwarts_data.dart
 ├── screens
 │   ├── character_detail.dart
 │   └── character_list.dart
 ├── utils
 │   └── random_utils.dart
 └── widgets
-    └── rating.dart
+    ├── favorite_character_icon.dart
+    ├── rating.dart
+    └── toggle_icon.dart
 ```
 
-L'inici de l'aplicació és a `main.dart`, a `models` hi ha la clase `Character` per definir atributs d'un personatge, a `screens` està el codi de les dues pantalles, a `widgets` hi ha els widgets propis que no corresponen a una pantalla determinada i a `utils` hi ha una extensió de `Random` que s'utilitza per generar un número de reviews aleatòries per cada personatge definit a `screens/character_list.dart`.
+L'inici de l'aplicació és a `main.dart`, a `models` hi ha la clase `Character` per definir atributs d'un personatge, a `screens` està el codi de les dues pantalles, a `widgets` hi ha els widgets propis que no corresponen a una pantalla determinada, a `providers` hi ha les dades i l'estat global que utilitza la llibreria [provider](https://pub.dev/packages/provider) i a `utils` hi ha una extensió de `Random` que s'utilitza per generar un número de reviews aleatòries per cada personatge definit a `screens/character_list.dart`.
 
 ## Imatges
 
@@ -73,3 +77,4 @@ L'inici de l'aplicació és a `main.dart`, a `models` hi ha la clase `Character`
 ## Recursos
 
 - [google_fonts](https://pub.dev/packages/google_fonts)
+- [provider](https://pub.dev/packages/provider)

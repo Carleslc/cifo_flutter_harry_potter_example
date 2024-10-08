@@ -1,32 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../models/character.dart';
+import '../providers/hogwarts_data.dart';
+import '../widgets/favorite_character_icon.dart';
 import '../widgets/rating.dart';
 
-class CharacterDetail extends StatefulWidget {
+class CharacterDetail extends StatelessWidget {
   const CharacterDetail({super.key, required this.character});
 
   final Character character;
 
   @override
-  State<CharacterDetail> createState() => _CharacterDetailState();
-}
-
-class _CharacterDetailState extends State<CharacterDetail> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.character.name),
+        title: Text(character.name),
       ),
       body: Column(
         children: [
           // Imatge del personatge
           Expanded(
             child: Hero(
-              tag: widget.character.name,
+              tag: character.name,
               child: Image.network(
-                widget.character.imageUrl,
+                character.imageUrl,
                 fit: BoxFit.fitHeight,
                 width: 500,
               ),
@@ -43,7 +41,7 @@ class _CharacterDetailState extends State<CharacterDetail> {
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     // Nom
                     child: Text(
-                      widget.character.name,
+                      character.name,
                       style: const TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
@@ -51,26 +49,33 @@ class _CharacterDetailState extends State<CharacterDetail> {
                     ),
                   ),
                   // Reviews
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Rating(
-                        value: widget.character.rating,
-                        onSelect: (int value) {
-                          // Update reviews
-                          setState(() {
-                            widget.character.reviews++;
-                            widget.character.totalRatings += value;
-                          });
-                          debugPrint('Review: $value');
-                          debugPrint('Rating: ${widget.character.rating}');
-                        },
-                      ),
-                      Text(
-                        '${widget.character.reviews} reviews',
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ],
+                  Consumer<HogwartsData>(
+                    builder: (
+                      BuildContext context,
+                      HogwartsData data,
+                      Widget? child,
+                    ) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Rating(
+                            value: character.rating,
+                            onSelect: (int rating) {
+                              // Update reviews
+                              data.addReview(character, rating);
+                              debugPrint('Review: $rating');
+                              debugPrint('Rating: ${character.rating}');
+                            },
+                          ),
+                          Text(
+                            '${character.reviews} reviews',
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                          // Favorit
+                          FavoriteCharacterIcon(character: character),
+                        ],
+                      );
+                    },
                   ),
                 ],
               ),
@@ -83,17 +88,17 @@ class _CharacterDetailState extends State<CharacterDetail> {
                     Column(children: [
                       const Icon(Icons.fitness_center),
                       const Text('Força'),
-                      Text('${widget.character.strength}'),
+                      Text('${character.strength}'),
                     ]),
                     Column(children: [
                       const Icon(Icons.auto_fix_normal),
                       const Text('Màgia'),
-                      Text('${widget.character.magicPower}'),
+                      Text('${character.magicPower}'),
                     ]),
                     Column(children: [
                       const Icon(Icons.speed),
                       const Text('Velocitat'),
-                      Text('${widget.character.speed}'),
+                      Text('${character.speed}'),
                     ]),
                   ],
                 ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../main.dart';
 import '../models/character.dart';
-import '../utils/random_utils.dart';
+import '../providers/hogwarts_data.dart';
+import '../widgets/favorite_character_icon.dart';
 import 'character_detail.dart';
 
 class CharacterList extends StatelessWidget {
@@ -14,63 +16,40 @@ class CharacterList extends StatelessWidget {
       appBar: AppBar(
         title: const Text(HogwartsApp.title),
       ),
-      body: ListView(
-        children: [
-          for (Character character in characters)
-            Padding(
-              padding: const EdgeInsets.all(4),
-              child: ListTile(
-                leading: Hero(
-                  tag: character.name,
-                  child: Image.network(character.imageUrl),
-                ),
-                title: Text(character.name),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          CharacterDetail(character: character),
+      body: Consumer<HogwartsData>(
+        builder: (BuildContext context, HogwartsData data, Widget? child) {
+          return ListView(
+            children: [
+              for (Character character in data.characters)
+                Padding(
+                  padding: const EdgeInsets.all(4),
+                  child: ListTile(
+                    leading: Hero(
+                      tag: character.name,
+                      child: Image.network(character.imageUrl),
                     ),
-                  );
-                },
-              ),
-            )
-        ],
+                    title: Text(character.name),
+                    subtitle: Text(
+                      '${character.reviews} reviews',
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary),
+                    ),
+                    trailing: FavoriteCharacterIcon(character: character),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              CharacterDetail(character: character),
+                        ),
+                      );
+                    },
+                  ),
+                )
+            ],
+          );
+        },
       ),
     );
   }
 }
-
-List<Character> characters = [
-  Character.withRating(
-    name: 'Harry Potter',
-    strength: 7,
-    magicPower: 10,
-    speed: 8,
-    imageUrl:
-        'https://static.wikia.nocookie.net/esharrypotter/images/8/8d/PromoHP7_Harry_Potter.jpg/revision/latest/scale-to-width-down/500?cb=20160903184919',
-    reviews: random.nextIntBetween(70, 100),
-    rating: random.nextIntBetween(3, 5),
-  ),
-  Character.withRating(
-    name: 'Ron Weasley',
-    strength: 8,
-    magicPower: 8,
-    speed: 6,
-    imageUrl:
-        'https://static.wikia.nocookie.net/esharrypotter/images/6/69/P7_promo_Ron_Weasley.jpg/revision/latest/scale-to-width-down/500?cb=20150523213430',
-    reviews: random.nextIntBetween(40, 70),
-    rating: random.nextIntBetween(1, 4),
-  ),
-  Character.withRating(
-    name: 'Hermione Granger',
-    strength: 6,
-    magicPower: 9,
-    speed: 7,
-    imageUrl:
-        'https://static.wikia.nocookie.net/warnerbros/images/3/3e/Hermione.jpg/revision/latest/scale-to-width-down/500?cb=20120729103114&path-prefix=es',
-    reviews: random.nextIntBetween(50, 100),
-    rating: random.nextIntBetween(3, 5),
-  ),
-];
