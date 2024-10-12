@@ -11,6 +11,7 @@ class HogwartsData extends ChangeNotifier {
   final List<Character> characters = [
     Character.withRating(
       name: 'Harry Potter',
+      birthDate: DateTime(1980, 7, 31),
       strength: 7,
       magicPower: 10,
       speed: 8,
@@ -21,6 +22,7 @@ class HogwartsData extends ChangeNotifier {
     ),
     Character.withRating(
       name: 'Ron Weasley',
+      birthDate: DateTime(1980, 3, 1),
       strength: 8,
       magicPower: 8,
       speed: 6,
@@ -31,6 +33,7 @@ class HogwartsData extends ChangeNotifier {
     ),
     Character.withRating(
       name: 'Hermione Granger',
+      birthDate: DateTime(1979, 9, 19),
       strength: 6,
       magicPower: 9,
       speed: 7,

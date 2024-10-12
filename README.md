@@ -59,6 +59,7 @@ lib
 │   ├── character_detail.dart
 │   └── character_list.dart
 ├── utils
+│   ├── date_utils.dart
 │   └── random_utils.dart
 └── widgets
     ├── favorite_character_icon.dart
@@ -66,7 +67,17 @@ lib
     └── toggle_icon.dart
 ```
 
-L'inici de l'aplicació és a `main.dart`, a `models` hi ha la clase `Character` per definir atributs d'un personatge, a `screens` està el codi de les dues pantalles, a `widgets` hi ha els widgets propis que no corresponen a una pantalla determinada, a `providers` hi ha les dades i l'estat global que utilitza la llibreria [provider](https://pub.dev/packages/provider) i a `utils` hi ha una extensió de `Random` que s'utilitza per generar un número de reviews aleatòries per cada personatge definit a `screens/character_list.dart`.
+L'inici de l'aplicació és a `main.dart`.
+
+A `models` hi ha la clase `Character` per definir atributs d'un personatge.
+
+A `screens` està el codi de les dues pantalles, `CharacterList` i `CharacterDetail`.
+
+A `widgets` hi ha els widgets propis que no corresponen a una pantalla determinada com el rating de les estrelles `Rating` o l'icona de favorit `FavoriteCharacterIcon`,
+
+A `providers` hi ha `HogwartsData` amb les dades dels personatges i l'estat global de l'aplicació, utilitzant la llibreria [provider](https://pub.dev/packages/provider).
+
+Finalment, a `utils` hi ha una extensió `RandomUtils` que s'utilitza per generar un número de reviews aleatòries per cada personatge, i altres extensions a `date_utils.dart` com `DurationExtension` i `DateFormatter` per donar format a la data de naixement.
 
 ## Imatges
 
@@ -78,3 +89,4 @@ L'inici de l'aplicació és a `main.dart`, a `models` hi ha la clase `Character`
 
 - [google_fonts](https://pub.dev/packages/google_fonts)
 - [provider](https://pub.dev/packages/provider)
+- [intl](https://pub.dev/packages/intl)

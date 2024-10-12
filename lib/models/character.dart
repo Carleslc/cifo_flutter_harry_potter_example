@@ -1,6 +1,9 @@
+import '../utils/date_utils.dart';
+
 class Character {
   // Person information
   final String name;
+  final DateTime birthDate;
 
   // Attributes
   final int strength;
@@ -19,6 +22,7 @@ class Character {
 
   Character({
     required this.name,
+    required this.birthDate,
     required this.strength,
     required this.magicPower,
     required this.speed,
@@ -29,6 +33,7 @@ class Character {
 
   Character.withRating({
     required String name,
+    required DateTime birthDate,
     required int strength,
     required int magicPower,
     required int speed,
@@ -37,6 +42,7 @@ class Character {
     int reviews = 0,
   }) : this(
           name: name,
+          birthDate: birthDate,
           strength: strength,
           magicPower: magicPower,
           speed: speed,
@@ -44,6 +50,8 @@ class Character {
           reviews: reviews,
           totalRatings: reviews * rating,
         );
+
+  int get age => DateTime.now().difference(birthDate).inYears;
 
   void addReview(int rating) {
     reviews++;

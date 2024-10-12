@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../models/character.dart';
 import '../providers/hogwarts_data.dart';
+import '../utils/date_utils.dart';
 import '../widgets/favorite_character_icon.dart';
 import '../widgets/rating.dart';
 
@@ -25,7 +26,7 @@ class CharacterDetail extends StatelessWidget {
               tag: character.name,
               child: Image.network(
                 character.imageUrl,
-                fit: BoxFit.fitHeight,
+                fit: BoxFit.cover,
                 width: 500,
               ),
             ),
@@ -37,14 +38,24 @@ class CharacterDetail extends StatelessWidget {
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  // Nom
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8),
-                    // Nom
                     child: Text(
                       character.name,
                       style: const TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  // Edat
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: Text(
+                      '${character.birthDate.formatDate()}  (${character.age} anys)',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   ),

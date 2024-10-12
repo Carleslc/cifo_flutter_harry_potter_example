@@ -1,11 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/hogwarts_data.dart';
 import 'screens/character_list.dart';
+import 'utils/date_utils.dart';
 
-void main() {
+void main() async {
+  // Inicialitza la localització de dates
+  await DateFormatter.init(Platform.localeName);
+
+  // Carrega l'aplicació
   runApp(const HogwartsApp());
 }
 
