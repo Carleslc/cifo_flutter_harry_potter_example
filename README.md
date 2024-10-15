@@ -2,7 +2,7 @@
 
 **Repositori d'aplicacions: [cifo_flutter](https://github.com/Carleslc/cifo_flutter)**
 
-Aplicació d'exemple per provar layouts, com funciona la navegació a Flutter i com controlar l'estat amb la llibreria [provider](https://pub.dev/packages/provider).
+Aplicació d'exemple per provar layouts, com funciona la navegació a Flutter, com controlar l'estat amb la llibreria [provider](https://pub.dev/packages/provider) i com persistir dades utilitzant la llibreria [isar](https://pub.dev/packages/isar).
 
 La primera pantalla conté una llista de personatges de Harry Potter, i en fer click en un d'ells s'obre una nova pantalla amb una imatge i els detalls del personatge seleccionat.
 
@@ -52,12 +52,17 @@ flutter pub get
 lib
 ├── main.dart
 ├── models
-│   └── character.dart
+│   ├── character.dart
+│   ├── character.g.dart
+│   ├── favorites.dart
+│   └── favorites.g.dart
 ├── providers
 │   └── hogwarts_data.dart
 ├── screens
 │   ├── character_detail.dart
 │   └── character_list.dart
+├── services
+│   └── database.dart
 ├── utils
 │   ├── date_utils.dart
 │   └── random_utils.dart
@@ -69,13 +74,15 @@ lib
 
 L'inici de l'aplicació és a `main.dart`.
 
-A `models` hi ha la clase `Character` per definir atributs d'un personatge.
+A `models` hi ha la clase `Character` per definir atributs d'un personatge i `Favorites` per la llista de personatges favorits.
+
+Els fitxers acabats en `.g.dart` són autogenerats per la gestió de la base de dades [Isar](https://pub.dev/packages/isar).
 
 A `screens` està el codi de les dues pantalles, `CharacterList` i `CharacterDetail`.
 
 A `widgets` hi ha els widgets propis que no corresponen a una pantalla determinada com el rating de les estrelles `Rating` o l'icona de favorit `FavoriteCharacterIcon`,
 
-A `providers` hi ha `HogwartsData` amb les dades dels personatges i l'estat global de l'aplicació, utilitzant la llibreria [provider](https://pub.dev/packages/provider).
+A `providers` hi ha `HogwartsData` amb les dades dels personatges i l'estat global de l'aplicació, utilitzant la llibreria [provider](https://pub.dev/packages/provider) per la gestió de l'estat i la llibreria [isar](https://pub.dev/packages/isar) per la persistència, mitjançant la clase `Database` a la carpeta `services`.
 
 Finalment, a `utils` hi ha una extensió `RandomUtils` que s'utilitza per generar un número de reviews aleatòries per cada personatge, i altres extensions a `date_utils.dart` com `DurationExtension` i `DateFormatter` per donar format a la data de naixement.
 
@@ -90,3 +97,5 @@ Finalment, a `utils` hi ha una extensió `RandomUtils` que s'utilitza per genera
 - [google_fonts](https://pub.dev/packages/google_fonts)
 - [provider](https://pub.dev/packages/provider)
 - [intl](https://pub.dev/packages/intl)
+- [path_provider](https://pub.dev/packages/path_provider)
+- [isar](https://pub.dev/packages/isar)

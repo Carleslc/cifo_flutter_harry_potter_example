@@ -1,6 +1,10 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 
 import '../models/character.dart';
+import '../models/favorites.dart';
+import '../services/database.dart';
 import '../utils/random_utils.dart';
 
 /// Provider que proporciona els personatges i l'estat de les reviews i els favorits
@@ -8,7 +12,10 @@ class HogwartsData extends ChangeNotifier {
   ///
   /// Personatges de Hogwarts
   ///
-  final List<Character> characters = [
+  List<Character> get characters => UnmodifiableListView(_characters);
+  List<Character> _characters = [];
+
+  final List<Character> _initialCharacters = [
     Character.withRating(
       name: 'Harry Potter',
       birthDate: DateTime(1980, 7, 31),
@@ -50,6 +57,9 @@ class HogwartsData extends ChangeNotifier {
 
   void addReview(Character character, int rating) {
     character.addReview(rating);
+
+    _database.updateCharacter(character);
+
     notifyListeners();
   }
 
@@ -57,16 +67,39 @@ class HogwartsData extends ChangeNotifier {
   // Favorits
   //
 
-  final Set<Character> favorites = {};
+  final Favorites<int> _favorites = Favorites();
 
-  bool isFavorite(Character character) => favorites.contains(character);
+  bool isFavorite(Character character) => _favorites.isFavorite(character.id);
 
   void toggleFavorite(Character character) {
-    if (favorites.contains(character)) {
-      favorites.remove(character);
-    } else {
-      favorites.add(character);
+    _favorites.toggleFavorite(character.id);
+
+    _database.updateFavorites(_favorites.toList());
+
+    notifyListeners();
+  }
+
+  ///
+  /// Database
+  ///
+  final Database _database = Database();
+
+  HogwartsData() {
+    _init();
+  }
+
+  Future<void> _init() async {
+    _characters = await _database.getAllCharacters();
+
+    if (_characters.isEmpty) {
+      _characters.addAll(_initialCharacters);
+      await _database.updateCharacters(_characters);
+      _characters = await _database.getAllCharacters();
     }
+
+    final favoriteIds = await _database.getFavoriteIds();
+    _favorites.setFavorites(favoriteIds);
+
     notifyListeners();
   }
 }

@@ -1,6 +1,13 @@
+import 'package:isar/isar.dart';
+
 import '../utils/date_utils.dart';
 
+part 'character.g.dart';
+
+@collection
 class Character {
+  Id id = Isar.autoIncrement;
+
   // Person information
   final String name;
   final DateTime birthDate;
