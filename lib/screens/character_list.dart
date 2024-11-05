@@ -5,17 +5,23 @@ import '../main.dart';
 import '../models/character.dart';
 import '../providers/hogwarts_data.dart';
 import '../widgets/favorite_character_icon.dart';
-import 'character_detail.dart';
 
 class CharacterList extends StatelessWidget {
-  const CharacterList({super.key});
+  final bool showAppBar;
+  final Character? selectedCharacter;
+  final void Function(Character)? onCharacterSelected;
+
+  const CharacterList({
+    super.key,
+    this.showAppBar = true,
+    this.onCharacterSelected,
+    this.selectedCharacter,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(HogwartsApp.title),
-      ),
+      appBar: showAppBar ? AppBar(title: const Text(HogwartsApp.title)) : null,
       body: Consumer<HogwartsData>(
         builder: (BuildContext context, HogwartsData data, Widget? child) {
           return ListView(
@@ -28,7 +34,14 @@ class CharacterList extends StatelessWidget {
                       tag: character.name,
                       child: Image.network(character.imageUrl),
                     ),
-                    title: Text(character.name),
+                    title: Text(
+                      character.name,
+                      style: TextStyle(
+                        fontWeight: character == selectedCharacter
+                            ? FontWeight.bold
+                            : FontWeight.normal,
+                      ),
+                    ),
                     subtitle: Text(
                       '${character.reviews} reviews',
                       style: TextStyle(
@@ -36,13 +49,11 @@ class CharacterList extends StatelessWidget {
                     ),
                     trailing: FavoriteCharacterIcon(character: character),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              CharacterDetail(character: character),
-                        ),
-                      );
+                      data.selectedCharacter = character;
+
+                      if (onCharacterSelected != null) {
+                        onCharacterSelected?.call(character);
+                      }
                     },
                   ),
                 )

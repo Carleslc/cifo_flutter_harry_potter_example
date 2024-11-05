@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/hogwarts_data.dart';
-import 'screens/character_list.dart';
+import 'screens/responsive_character_list.dart';
 import 'utils/date_utils.dart';
 
 void main() async {
@@ -35,7 +35,7 @@ class HogwartsApp extends StatelessWidget {
             backgroundColor: Colors.deepPurple.shade400,
           ),
         ),
-        home: const CharacterList(),
+        home: const ResponsiveCharacterList(),
         debugShowCheckedModeBanner: true, // debug banner
       ),
     );

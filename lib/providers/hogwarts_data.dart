@@ -51,6 +51,15 @@ class HogwartsData extends ChangeNotifier {
     ),
   ];
 
+  /// Personatge seleccionat
+  Character? get selectedCharacter => _selectedCharacter;
+  Character? _selectedCharacter;
+
+  set selectedCharacter(Character? selectedCharacter) {
+    _selectedCharacter = selectedCharacter;
+    notifyListeners();
+  }
+
   //
   // Reviews
   //
