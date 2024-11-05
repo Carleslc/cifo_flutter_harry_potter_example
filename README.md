@@ -2,7 +2,7 @@
 
 **Repositori d'aplicacions: [cifo_flutter](https://github.com/Carleslc/cifo_flutter)**
 
-Aplicació d'exemple per provar layouts i aprendre com funciona la navegació a Flutter, com controlar l'estat amb la llibreria [provider](https://pub.dev/packages/provider), com persistir dades utilitzant la llibreria [isar](https://pub.dev/packages/isar).
+Aplicació d'exemple per provar layouts i aprendre com funciona la navegació a Flutter, com controlar l'estat amb la llibreria [provider](https://pub.dev/packages/provider), com persistir dades utilitzant la llibreria [isar](https://pub.dev/packages/isar) i com fer localització de textos.
 
 La primera pantalla conté una llista de personatges de Harry Potter, i en fer click en un d'ells s'obre una nova pantalla amb una imatge i els detalls del personatge seleccionat.
 

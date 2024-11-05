@@ -1,0 +1,10 @@
+{
+  "appBarTitle": "Hogwarts App",
+  "strength": "Fuerza",
+  "magic": "Magia",
+  "speed": "Velocidad",
+  "selectCharacter": "Selecciona un personaje",
+  "characterDetails": "{characterName}",
+  "nReviews": "{count, plural, =0{sin valoraciones} =1{1 valoración} other{{count} valoraciones}}",
+  "nYears": "{count, plural, =1{1 año} other{{count} años}}"
+}

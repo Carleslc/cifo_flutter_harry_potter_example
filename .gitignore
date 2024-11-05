@@ -31,6 +31,9 @@ migrate_working_dir/
 .pub/
 /build/
 
+# Localization
+l10n_missing_translations.json
+
 # Symbolication related
 app.*.symbols
 

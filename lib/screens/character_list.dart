@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../main.dart';
 import '../models/character.dart';
 import '../providers/hogwarts_data.dart';
 import '../widgets/favorite_character_icon.dart';
 
-class CharacterList extends StatelessWidget {
+class CharacterList extends StatefulWidget {
   final bool showAppBar;
   final Character? selectedCharacter;
   final void Function(Character)? onCharacterSelected;
@@ -19,9 +19,22 @@ class CharacterList extends StatelessWidget {
   });
 
   @override
+  State<CharacterList> createState() => _CharacterListState();
+}
+
+class _CharacterListState extends State<CharacterList> {
+  late AppLocalizations l;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    l = AppLocalizations.of(context)!;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: showAppBar ? AppBar(title: const Text(HogwartsApp.title)) : null,
+      appBar: widget.showAppBar ? AppBar(title: Text(l.appBarTitle)) : null,
       body: Consumer<HogwartsData>(
         builder: (BuildContext context, HogwartsData data, Widget? child) {
           return ListView(
@@ -37,22 +50,23 @@ class CharacterList extends StatelessWidget {
                     title: Text(
                       character.name,
                       style: TextStyle(
-                        fontWeight: character == selectedCharacter
+                        fontWeight: character == widget.selectedCharacter
                             ? FontWeight.bold
                             : FontWeight.normal,
                       ),
                     ),
                     subtitle: Text(
-                      '${character.reviews} reviews',
+                      l.nReviews(character.reviews),
                       style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary),
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
                     ),
                     trailing: FavoriteCharacterIcon(character: character),
                     onTap: () {
                       data.selectedCharacter = character;
 
-                      if (onCharacterSelected != null) {
-                        onCharacterSelected?.call(character);
+                      if (widget.onCharacterSelected != null) {
+                        widget.onCharacterSelected?.call(character);
                       }
                     },
                   ),

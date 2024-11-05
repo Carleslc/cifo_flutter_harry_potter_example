@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../models/character.dart';
@@ -8,7 +9,7 @@ import '../utils/responsive.dart';
 import '../widgets/favorite_character_icon.dart';
 import '../widgets/rating.dart';
 
-class CharacterDetail extends StatelessWidget {
+class CharacterDetail extends StatefulWidget {
   const CharacterDetail({
     super.key,
     required this.character,
@@ -19,11 +20,38 @@ class CharacterDetail extends StatelessWidget {
   final bool showAppBar;
 
   @override
+  State<CharacterDetail> createState() => _CharacterDetailState();
+}
+
+class _CharacterDetailState extends State<CharacterDetail> {
+  late Character character;
+
+  late AppLocalizations l;
+
+  @override
+  void initState() {
+    super.initState();
+    character = widget.character;
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    l = AppLocalizations.of(context)!;
+  }
+
+  @override
+  void didUpdateWidget(covariant CharacterDetail old) {
+    super.didUpdateWidget(old);
+    character = widget.character;
+  }
+
+  @override
   Widget build(BuildContext context) {
     bool vertical = isVertical(context);
 
     return Scaffold(
-      appBar: showAppBar ? AppBar(title: Text(character.name)) : null,
+      appBar: widget.showAppBar ? AppBar(title: Text(character.name)) : null,
       body: Column(children: [
         // Imatge del personatge
         if (vertical)
@@ -70,7 +98,7 @@ class CharacterDetail extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 16),
               child: Text(
-                '${character.birthDate.formatDate()}  (${character.age} anys)',
+                '${character.birthDate.formatDate()}  (${l.nYears(character.age)})',
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.secondary,
                 ),
@@ -96,7 +124,7 @@ class CharacterDetail extends StatelessWidget {
                       },
                     ),
                     Text(
-                      '${character.reviews} reviews',
+                      l.nReviews(character.reviews),
                       style: const TextStyle(fontSize: 16),
                     ),
                     // Favorit
@@ -115,17 +143,17 @@ class CharacterDetail extends StatelessWidget {
             children: [
               Column(children: [
                 const Icon(Icons.fitness_center),
-                const Text('Força'),
+                Text(l.strength),
                 Text('${character.strength}'),
               ]),
               Column(children: [
                 const Icon(Icons.auto_fix_normal),
-                const Text('Màgia'),
+                Text(l.magic),
                 Text('${character.magicPower}'),
               ]),
               Column(children: [
                 const Icon(Icons.speed),
-                const Text('Velocitat'),
+                Text(l.speed),
                 Text('${character.speed}'),
               ]),
             ],

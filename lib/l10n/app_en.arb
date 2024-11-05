@@ -1,0 +1,34 @@
+{
+  "appBarTitle": "Hogwarts App",
+  "@appBarTitle": {
+    "description": "The app title that appears in AppBar"
+  },
+  "strength": "Strength",
+  "magic": "Magic",
+  "speed": "Speed",
+  "selectCharacter": "Select a character",
+  "characterDetails": "{characterName} details",
+  "@characterDetails": {
+    "placeholders": {
+      "characterName": {
+        "type": "String"
+      }
+    }
+  },
+  "nReviews": "{count, plural, =0{no reviews} =1{1 review} other{{count} reviews}}",
+  "@nReviews": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "nYears": "{count, plural, =1{1 year old} other{{count} years old}}",
+  "@nYears": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
+}

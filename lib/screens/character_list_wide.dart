@@ -1,22 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../main.dart';
 import '../models/character.dart';
 import '../providers/hogwarts_data.dart';
 import 'character_detail.dart';
 import 'character_list.dart';
 
-class CharacterListWide extends StatelessWidget {
+class CharacterListWide extends StatefulWidget {
   final void Function(Character)? onCharacterSelected;
 
   const CharacterListWide({super.key, this.onCharacterSelected});
 
   @override
+  State<CharacterListWide> createState() => _CharacterListWideState();
+}
+
+class _CharacterListWideState extends State<CharacterListWide> {
+  late AppLocalizations l;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    l = AppLocalizations.of(context)!;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(HogwartsApp.title),
+        title: Text(l.appBarTitle),
       ),
       body: Selector<HogwartsData, Character?>(
         selector: (_, data) => data.selectedCharacter,
@@ -34,7 +47,7 @@ class CharacterListWide extends StatelessWidget {
                 child: CharacterList(
                   showAppBar: false,
                   selectedCharacter: selectedCharacter,
-                  onCharacterSelected: onCharacterSelected,
+                  onCharacterSelected: widget.onCharacterSelected,
                 ),
               ),
               Flexible(
@@ -52,6 +65,6 @@ class CharacterListWide extends StatelessWidget {
     if (character != null) {
       return CharacterDetail(character: character, showAppBar: false);
     }
-    return Center(child: const Text('Escull un personatge'));
+    return Center(child: Text(l.selectCharacter));
   }
 }

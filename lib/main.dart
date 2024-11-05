@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -17,8 +18,6 @@ void main() async {
 }
 
 class HogwartsApp extends StatelessWidget {
-  static const title = 'Hogwarts App';
-
   const HogwartsApp({super.key});
 
   @override
@@ -26,7 +25,7 @@ class HogwartsApp extends StatelessWidget {
     return ChangeNotifierProvider<HogwartsData>(
       create: (context) => HogwartsData(),
       child: MaterialApp(
-        title: title,
+        onGenerateTitle: (context) => AppLocalizations.of(context)!.appBarTitle,
         theme: ThemeData(
           textTheme:
               GoogleFonts.montserratTextTheme(Theme.of(context).textTheme),
@@ -37,6 +36,13 @@ class HogwartsApp extends StatelessWidget {
         ),
         home: const ResponsiveCharacterList(),
         debugShowCheckedModeBanner: true, // debug banner
+        // Localització
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: [
+          Locale('en'), // English
+          Locale('es'), // Español
+          Locale('ca'), // Català
+        ],
       ),
     );
   }
