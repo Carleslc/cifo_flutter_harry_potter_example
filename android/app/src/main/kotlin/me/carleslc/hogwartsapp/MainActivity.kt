@@ -1,4 +1,4 @@
-package com.example.harry_potter_example
+package me.carleslc.hogwartsapp
 
 import io.flutter.embedding.android.FlutterActivity
 

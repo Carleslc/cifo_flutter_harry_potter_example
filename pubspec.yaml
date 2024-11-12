@@ -4,10 +4,10 @@ description: "Aplicació d'exemple per provar layouts, localització, navegació
 
 publish_to: 'none'
 
-version: 1.0.0
+version: 1.0.0+1
 
 environment:
-  sdk: '>=3.4.3'
+  sdk: '>=3.4.3 <4.0.0'
 
 dependencies:
   flutter:
@@ -27,7 +27,23 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   isar_generator: ^3.1.0+1
   build_runner: ^2.4.13
+  package_rename: ^1.7.1
+  flutter_launcher_icons: ^0.14.1
 
 flutter:
   uses-material-design: true
   generate: true # l10n
+
+package_rename_config:
+  android:
+    app_name: Hogwarts
+    package_name: me.carleslc.hogwartsapp
+    override_old_package: com.example.harry_potter_example
+  ios:
+    app_name: Hogwarts
+    bundle_name: me.carleslc
+    package_name: me.carleslc.hogwartsapp
+  web:
+    app_name: Hogwarts App
+    short_app_name: Hogwarts
+    description: Aplicació d'exemple amb Flutter, tematitzat amb Harry Potter.

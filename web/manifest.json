@@ -1,11 +1,11 @@
 {
-    "name": "harry_potter_example",
-    "short_name": "harry_potter_example",
+    "name": "Hogwarts App",
+    "short_name": "Hogwarts",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#F6C546",
+    "theme_color": "#000000",
+    "description": "Aplicació d'exemple amb Flutter, tematitzat amb Harry Potter.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
